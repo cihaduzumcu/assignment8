@@ -9,5 +9,8 @@
     "dev": "node --watch server.js"
   },
   "author": "Cihad Ahmed Üzümcü",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.3.0"
+  }
 }
