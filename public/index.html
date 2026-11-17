@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Web Development Programme</title>
     <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
   </head>
   <body>
     <header class="page-header">
@@ -15,10 +16,35 @@
         learn to explain the decisions behind their code.
       </p>
       <p>
-        This page is served by the programme's own Express server.
+        This page is served by the programme's own Express server. Use the buttons below to call
+        each API route and see exactly what the server answers.
       </p>
     </header>
 
-    <footer class="page-footer">Assignment8 Express 5 information server</footer>
+    <main class="layout">
+      <section class="routes" aria-labelledby="routes-title">
+        <h2 id="routes-title">Try the API</h2>
+        <div class="buttons">
+          <button type="button" data-method="GET" data-url="/api/courses">GET /api/courses</button>
+          <button type="button" data-method="GET" data-url="/api/status">GET /api/status</button>
+          <button type="button" data-method="GET" data-url="/api/headers">GET /api/headers</button>
+          <button type="button" data-method="POST" data-url="/api/subscribe">POST /api/subscribe</button>
+          <button type="button" data-method="GET" data-url="/api/admin">GET /api/admin</button>
+          <button type="button" data-method="GET" data-url="/api/stats">GET /api/stats</button>
+          <button type="button" data-method="GET" data-url="/api/does-not-exist">GET /api/does-not-exist</button>
+        </div>
+      </section>
+
+      <section class="result" aria-labelledby="result-title" aria-live="polite">
+        <h2 id="result-title">Response</h2>
+        <p class="status-line">
+          <span id="request-line">No request yet.</span>
+          <span id="status" class="status"></span>
+        </p>
+        <pre id="body">Click a button to call a route.</pre>
+      </section>
+    </main>
+
+    <footer class="page-footer">Assignment 8 · Express 5 information server</footer>
   </body>
 </html>
