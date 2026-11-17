@@ -54,6 +54,15 @@ app.get("/api/admin", (req, res) => {
   res.status(403).json({ error: "Forbidden" });
 });
 
+app.use((req, res) => {
+  const isApiRequest = req.path === "/api" || req.path.startsWith("/api/");
+  if (isApiRequest) {
+    res.status(404).json({ error: "Not found" });
+  } else {
+    res.status(404).type("text/plain").send(`Page not found: ${req.path}`);
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
