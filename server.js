@@ -4,7 +4,7 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-const OWNER_NAME = "Cihad Ahned Üzümcü";
+const OWNER_NAME = "Cihad Ahmed Üzümcü";
 
 const COURSES = [
   { id: 1, title: "Introduction to Programming", credits: 6 },
@@ -37,6 +37,21 @@ app.get("/api/status", (req, res) => {
     nodeVersion: process.version,
     uptimeSeconds: Math.floor(process.uptime()),
   });
+});
+
+app.get("/api/headers", (req, res) => {
+  res.json({
+    userAgent: req.get("User-Agent") ?? null,
+    accept: req.get("Accept") ?? null,
+  });
+});
+
+app.post("/api/subscribe", (req, res) => {
+  res.status(201).json({ subscribed: true });
+});
+
+app.get("/api/admin", (req, res) => {
+  res.status(403).json({ error: "Forbidden" });
 });
 
 app.listen(PORT, () => {
