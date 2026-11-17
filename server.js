@@ -15,6 +15,22 @@ const COURSES = [
 
 const ROBOTS_TXT = ["User-agent: *", "Disallow: /api/", "Allow: /"].join("\n");
 
+let requestsServed = 0;
+
+function requestLogger(req, res, next) {
+  const timestamp = new Date().toISOString();
+  console.log(`[${timestamp}] ${req.method} ${req.originalUrl}`);
+  next();
+}
+
+function requestCounter(req, res, next) {
+  requestsServed += 1;
+  next();
+}
+
+app.use(requestLogger);
+app.use(requestCounter);
+
 app.get("/hello", (req, res) => {
   res.send(`Hello from ${OWNER_NAME}'s server`);
 });
@@ -52,6 +68,10 @@ app.post("/api/subscribe", (req, res) => {
 
 app.get("/api/admin", (req, res) => {
   res.status(403).json({ error: "Forbidden" });
+});
+
+app.get("/api/stats", (req, res) => {
+  res.json({ requestsServed });
 });
 
 app.use((req, res) => {
