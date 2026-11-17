@@ -1,8 +1,13 @@
 import express from "express";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const app = express();
 
 const PORT = process.env.PORT || 3000;
+
+const SERVER_DIR = path.dirname(fileURLToPath(import.meta.url));
+const PUBLIC_DIR = path.join(SERVER_DIR, "public");
 
 const OWNER_NAME = "Cihad Ahmed Üzümcü";
 
@@ -30,6 +35,8 @@ function requestCounter(req, res, next) {
 
 app.use(requestLogger);
 app.use(requestCounter);
+
+app.use(express.static(PUBLIC_DIR));
 
 app.get("/hello", (req, res) => {
   res.send(`Hello from ${OWNER_NAME}'s server`);
