@@ -1,12 +1,29 @@
+:root {
+  --bg: #f6f7f9;
+  --panel: #ffffff;
+  --text: #1f2933;
+  --muted: #5f6b7a;
+  --border: #d5dbe3;
+  --accent: #2457c5;
+  --ok: #1b7f4c;
+  --error: #b42318;
+  --pending: #8a6100;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: system-ui, "Segoe UI", Arial, sans-serif;
   line-height: 1.6;
-  background: #f6f7f9;
-  color: #1f2933;
+  background: var(--bg);
+  color: var(--text);
 }
 
 .page-header,
+.layout,
 .page-footer {
   max-width: 1000px;
   margin: 0 auto;
@@ -17,8 +34,100 @@ body {
   padding-top: 32px;
 }
 
+.page-header p {
+  max-width: 68ch;
+  color: var(--muted);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+  margin-top: 24px;
+}
+
+@media (min-width: 800px) {
+  .layout {
+    grid-template-columns: 280px minmax(0, 1fr);
+  }
+}
+
+.routes,
+.result {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+h2 {
+  margin-top: 0;
+  font-size: 1.1rem;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+button {
+  padding: 8px 12px;
+  text-align: left;
+  font: inherit;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.9rem;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover,
+button:focus-visible {
+  border-color: var(--accent);
+  outline: none;
+}
+
+.status-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  font-family: ui-monospace, Consolas, monospace;
+}
+
+.status {
+  font-weight: 700;
+}
+
+.status.ok {
+  color: var(--ok);
+}
+
+.status.error {
+  color: var(--error);
+}
+
+.status.pending {
+  color: var(--pending);
+}
+
+pre {
+  margin: 0;
+  padding: 12px;
+  min-height: 160px;
+  overflow-x: auto;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
 .page-footer {
   padding-top: 24px;
   padding-bottom: 32px;
-  color: #5f6b7a;
+  color: var(--muted);
+  font-size: 0.9rem;
 }
